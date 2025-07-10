@@ -1,51 +1,44 @@
-const indexHtml = require("../src/index.js");
-const styleCss = require("../src/style.js");
-const notFoundPageHtml = require("../src/404.js");
-const handleAddPage = require("../utils/handleAddPage");
-const handleSubPage = require("../utils/handleSubPage");
-const handleMulPage = require("../utils/handleMulPage");
-const handleDivPage= require("../utils/handleDivPage");
+const loadhtml = require("../src/main.js");
+const handleOperations = require("../utils/handleOperations.js");
 
-function router(req,res) {
-    if (req.url == "/" || req.url == "/home") {
-      console.log("home page accessed");
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.end(indexHtml);
-    } 
-    else if (req.url.startsWith("/add")) {
-      console.log("add page accessed");
-      const resultHtml = handleAddPage(req);
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.end(resultHtml);
-    }
-    else if (req.url.startsWith("/sub")) {
-      console.log("sub page accessed");
-      const resultHtml=handleSubPage(req);
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.end(resultHtml);
-    } 
-    else if (req.url.startsWith("/div")) {
-      console.log("div page accessed");
-      let resultHtml=handleDivPage(req);
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.end(resultHtml);
-    }
-    else if (req.url.startsWith("/mul")) {
-      console.log("mul page accessed");
-      const resultHtml=handleMulPage(req);
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.end(resultHtml);
-    } 
-    else if (req.url == "/style.css") {
-      res.writeHead(200, { "Content-Type": "text/css" });
-      res.end(styleCss);
-    } 
-    else {
-      console.log("404 page accessed");
-      res.writeHead(404, { "Content-Type": "text/html" });
-      res.end(notFoundPageHtml);
-    }
+function router(req, res) {
+  const fullPath = req.url.split("?")[0]; // returns /add , /sub , /
+  console.log('fullPath>>>',fullPath);
+  
+  const request = fullPath === "/" ? "/" : fullPath.slice(1);   // handle "/" correctly
+  console.log("requested page>>>>", request);           //[add,sub,mul,div,/]
+
+  const routeTable = {
+    "/": {
+      page: () => loadhtml.indexHtml
+    },
+    home: {
+      page: () => loadhtml.indexHtml
+    },
+    add: {
+      page: handleOperations,
+    },
+    sub: {
+      page: handleOperations,
+    },
+    mul: {
+      page: handleOperations,
+    },
+    div: {
+      page: handleOperations,
+    },
   };
 
+  const route = routeTable[request];
+  if (route) {
+    console.log(`${request} page accessed`);
+    const resultHtml = route.page(req); 
+    res.writeHead(200, { "Content-Type": "text/html" });
+    res.end(resultHtml);
+  } else {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    res.end(loadhtml.notFoundPageHtml);
+  }
+}
 
-  module.exports=router;
+module.exports = router;

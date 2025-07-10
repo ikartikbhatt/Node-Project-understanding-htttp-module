@@ -1,4 +1,4 @@
-const styleCss=`* {
+const styleCss = `* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -46,7 +46,6 @@ const styleCss=`* {
     width: 100%;
     max-width: 300px;
   }
-  
   .buttons a:hover,
   button:hover,
   .back:hover {
@@ -72,9 +71,66 @@ const styleCss=`* {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(255, 182, 193, 0.4);
 }
-
 }
-`
-  
+`;
 
-  module.exports=styleCss
+const notFoundPageHtmlCss = `
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff0f5; /* optional */
+  }
+
+  .not-found {
+    background-color: #fff0f5;
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 0 0 40px rgba(255, 105, 180, 0.3);
+    text-align: center;
+    max-width: 480px;
+    width: 90%;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .not-found h1 {
+    font-size: 4rem;
+    color: #ff69b4;
+  }
+
+  .not-found p {
+    font-size: 1.2rem;
+    color: #6c3483;
+    margin-bottom: 20px;
+  }
+
+  .not-found a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 20px;
+    background-color: #ffb6c1;
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .not-found a:hover {
+    background-color: #ff69b4;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+`;
+
+
+module.exports = {styleCss, notFoundPageHtmlCss };

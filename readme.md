@@ -21,33 +21,30 @@ A modular, beginner-friendly calculator web app built using **only Node.js's nat
 PROJECT-1/
 │
 ├── modules/ # Logic for arithmetic operations
-│ ├── add.js
-│ ├── sub.js
-│ ├── mul.js
-│ └── div.js
+│ ├── operations.js
+│
+│
+│── route/ #routing
+│ ├── routes.js
 │
 ├── utils/ # Helper functions and page handlers
-│ ├── handleAddPage.js
-│ ├── handleSubPage.js
-│ ├── handleMulPage.js
-│ ├── handleDivPage.js
-│ 
-|
-├── src/ # Static HTML/CSS strings (exported)
-│ ├── index.js # Home page
-│ ├── add.js # Add page
-│ ├── sub.js # Subtract page
-│ ├── mul.js # Multiply page
-│ ├── div.js # Divide page
-│ ├── style.js # CSS as JS string
-│ └── 404.js # Not Found page
+│ ├── handleOperations.js
 │
+│
+├── src/ # Static HTML/CSS strings (exported)
+│ ├── main.js
+│
+│
+|──styles
+| ├──style.css
+│
+│  
 ├── server/
 │ └── server.js # Starts the HTTP server
 │
 └── README.md # This file
 
------
+---
 
 ## 🧪 How to Run
 
@@ -69,3 +66,4 @@ node server.js
 
 #visit in your browser:
 http://localhost:4000
+```
